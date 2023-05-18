@@ -1,0 +1,121 @@
+
+ This sample database describes some 
+ of the Z80 microprocessors hardware
+ organisation and its addressing modes
+ with examples.
+ÿ
+ Registers followed by width <x> in
+ bits.
+
+ A  <8>  Working accumulator.
+
+ F  <8>  Flag register.
+
+ B,C<8>  Register pairs can be operated
+ D,E     on as 16 bits quantities.
+ H,L
+
+ IX <16> Index register.
+ IY <16> Index register.
+ SP <16> Stack pointer.
+ PC <16> Program counter.
+
+ I  <8>  Interrupt register.
+
+ There also exists a duplicate set of
+ registers namely A', F', B', C', D',
+ E', H' and L'. These can be 'paged in'
+ by a special instruction. Only one set
+ may be used at a time.
+ÿ Address mode : Implied
+
+ Description  :
+
+ This mode is used on inter register
+ transfers and operations. They are
+ single byte and single cycle
+ instructions.
+
+ Example : LD A,B
+
+ Transfer B to A.
+ÿ Address mode : Immediate
+
+ Description  :
+
+ There are two types of addressing, 8
+ or 16 bit. Depending on the length they
+ are either two or three bytes long.
+
+ Example : LD A,23
+
+ Load accumulator with 23 decimal.
+ÿ Address mode : Absolute
+
+ Description  :
+
+ This where an absolute address is
+ specified as the absolute location. It
+ is sometimes known as 'extended'
+ addressing to distinguish it from 8 bit
+ relative addressing.
+
+ Example : LD HL,(nn)
+
+ Load HL pair from memory nn.
+ÿ Address mode : Modified Zero-Page
+
+ Description  :
+
+ Only one instruction namely RST.
+ Within the opcode is a 3 bit field
+ which points to one of eight locations
+ in zero page which are eight bytes
+ apart. This vectors the processor PC to
+ a small piece of code.
+
+ Example : RST
+ÿ Address mode : Relative
+
+ Description  :
+
+ This requires two bytes firstly a jump
+ relative opcode and then the signed
+ offset which the PC will jump to.
+
+ Example : JR NZ,e
+
+ Jump relative if Not Zero.
+ÿ Address mode : Indexed
+
+ Description  :
+
+ Index addressing is useful for
+ accessing a table of values in memory
+ in sequential order. The instruction
+ specifies a memory address plus and
+ index register. At run time the two are
+ added together to form the address.
+
+ Example : LD A,(IX+d)
+
+ Load accumulator with memory pointed
+ at by index register IX plus a signed
+ displacement d.
+ÿ Address mode : Indirect
+
+ Description  :
+
+ For different programs to access a
+ common table in memory it is usual to
+ provide an address which contains a
+ pointer to it. When loaded with the
+ address of the table it can then be
+ accessed relative to the initial
+ address.
+
+ Example : LD IX,(nn)
+
+ Load index register with the contents
+ of address nn and nn+1.
+ÿ

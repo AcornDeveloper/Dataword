@@ -1,0 +1,161 @@
+
+ This sample database lists some of
+ the 6502 microprocessors hardware
+ organisation and its addressing
+ modes with examples.
+ÿ
+ Registers followed by width <x> in
+ bits.
+
+ A  <8>  Working accumulator.
+
+ X  <8>  Index register.
+ Y  <8>  Index register.
+
+ SR <8>  Processor status flags.
+ SP <16> Stack pointer.
+ PC <16> Program counter.
+ÿ Address mode : Implicit
+
+ Description  :
+
+ The addressing mode is does not need to
+ be specified as it is implicit in the
+ instruction itself.
+
+ Example : RTS
+
+ Return from subroutine.
+ÿ Address mode : Accumulator
+
+ Description  :
+
+ These instructions either operate on
+ the accumulator or a memory location.
+
+ Example : ASL A
+
+ Shift accumulator contents one bit to
+ the left.
+ÿ Address mode : Immediate
+
+ Description  :
+
+ This is the mode whereby an immediate
+ specified data constant is loaded in.
+
+ Example : LDA #23
+
+ Load accumulator with 23 decimal.
+ÿ Address mode : Absolute
+
+ Description  :
+
+ This where an absolute address is
+ specified at the time of assembly. This
+ is taken as a 16 bit address.
+
+ Example : LDX &1200
+
+ Load X register with the contents of
+ location (hex) 1200.
+ÿ Address mode : Zero page
+
+ Description  :
+
+ This is the same as absolute except
+ that the memory location is in the
+ first 256 bytes of memory.
+
+ Example : CMP &40
+
+ Compare accumulator with the contents
+ of location (hex) 40.
+ÿ Address mode : Indirect
+
+ Description  :
+
+ This specifies a two byte location
+ whose contents contains a 16 bit
+ address.
+
+ Example : JMP (nn)
+
+ Jump to the address contained in
+ locations nn and nn+1.
+ÿ Address mode : X,Y Absolute
+
+ Description  :
+
+ Index addressing is useful for
+ accessing a table of values in memory
+ in sequential order. The instruction
+ specifies a memory address plus and
+ index register. At run time the two are
+ added together to form the address.
+
+ Example : LDA &1400,Y
+
+ Load accumulator with memory pointed
+ at by index register Y plus the
+ constant (hex) 1400.
+ÿ Address mode : Zero page,X
+
+ Description  :
+
+ This is the same as the absolute X,Y
+ addressing except that a zero page
+ address is specified. You may only use
+ the X register with the mode.
+
+ Example : LDA &70,X
+
+ Load accumulator with the memory
+ contents pointed to by the X register
+ plus the constant (hex) 70.
+ÿ Address mode : Pre-indexed indirect
+
+ Description  :
+
+ A table of 16 bit pointers in zero
+ page is accessed using the X register
+ and an eight bit base constant.
+
+
+ Example : LDA (&70,X)
+
+ The address computed from the constant
+ (hex) 70 plus the X register contains a
+ 16 bit address from which the
+ accumulator is loaded.
+ÿ Address mode : Post-indexed indirect
+
+ Description  :
+
+ At the address specified in page zero
+ there is a 1 bit address. This is then
+ added to the Y register to form an
+ address from which the accumulator is
+ loaded.
+
+ Example : LDA (&70),Y
+
+ Load accumulator with the memory
+ contents of the zero page (hex) 70 and
+ 71 plus the Y register.
+ÿ Address mode : Relative
+
+ Description  :
+
+ This mode allows an address to be
+ specified relative to the present
+ instruction address. This is added to
+ the program counter to execute a jump
+ -128 or +127 bytes from the current
+ location.
+
+ Example : BCC loop
+
+ Branch on carry clear to loop which is
+ a label defined as a memory location.
+ÿ
