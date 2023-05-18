@@ -1,0 +1,31 @@
+   10 REM>$.BBCMT
+   20 REM> BBC Master disc to tape creator
+   30 REM> Written by Matthew Atkinson
+   40 REM> (c) 1991 Triple R Education
+   50 
+   60 IF PAGE<>&5800:PAGE=&5800:CHAIN"BBCMT"
+   70 *TV255 1
+   80 MODE 6
+   90 PRINT"BBC MASTER DISC TO TAPE TRANSFER"'
+  100 PRINT"Press RECORD on tape."
+  110 PRINT"Press RETURN when ready."
+  120 *FX21 0
+  130 REPEAT
+  140 Z%=GET
+  150 UNTILZ%=&D
+  160 PRINT"No need to press RETURN again."
+  170 PROCcopy("LoadMAS",3100)
+  180 PROCcopy("Dat6",13000)
+  190 PROCcopy("Dat7",13000)
+  200 CLS
+  210 PRINT"Completed"
+  220 END
+  230 
+  240 DEFPROCcopy(file$,length%)
+  250 OSCLI"LOAD $."+file$+" 1900"
+  260 *TAPE
+  270 *FX138 0 13
+  280 OSCLI"SAVE "+file$+" 1900 +"+STR$~(length%)+" 8023"
+  290 *DISC
+  300 ENDPROC
+
