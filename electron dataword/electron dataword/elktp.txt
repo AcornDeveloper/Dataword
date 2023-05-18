@@ -1,0 +1,30 @@
+   10 REM>$.ELKTP
+   20 REM> Electron disc to tape creator
+   30 REM> Written by Matthew Atkinson
+   40 REM> (c) 1991 Triple R Education
+   50 
+   60 IF PAGE<>&5800:PAGE=&5800:CHAIN"ELKTP"
+   70 *TV255 1
+   80 MODE 6
+   90 PRINT "ELECTRON DISC TO TAPE TRANSFER"'
+  100 PRINT"Press RECORD on tape."
+  110 PRINT"Press RETURN when ready."
+  120 *FX21 0
+  130 REPEAT
+  140 Z%=GET
+  150 UNTILZ%=&D
+  160 PRINT"No need to press RETURN again."
+  170 PROCcopy("Loader",2500)
+  180 PROCcopy("DatE6",13000)
+  190 CLS
+  200 PRINT"Completed"
+  210 END
+  220 
+  230 DEFPROCcopy(file$,length%)
+  240 OSCLI"LOAD $."+file$+" 1900"
+  250 *TAPE
+  260 *FX138 0 13
+  270 OSCLI"SAVE "+file$+" 1900 +"+STR$~(length%)+" 8023"
+  280 *DISC
+  290 ENDPROC
+
